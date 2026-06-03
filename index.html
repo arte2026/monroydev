@@ -1,245 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guillermo Rayas Monroy | Developer Portfolio</title>
+  <meta charset="utf-8" />
+  <title>Guillermo — 3D Profile</title>
   <style>
-    :root {
-      --bg-color: #0f0f11;
-      --cube-bg: rgba(25, 25, 30, 0.95);
-      --cube-border: rgba(255, 255, 255, 0.15);
-      --text-main: #ffffff;
-      --text-muted: #888890;
-      --accent: #4a90e2;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      perspective: 1000px; /* Gives the 3D depth to the scene */
-    }
-
-    /* 3D Scene Setup */
-    .scene {
-      width: 300px;
-      height: 300px;
-      position: relative;
-      cursor: grab;
-    }
-    
-    .scene:active {
-      cursor: grabbing;
-    }
-
-    .cube {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      transform-style: preserve-3d;
-      transform: translateZ(-150px) rotateX(-15deg) rotateY(-25deg);
-      transition: transform 0.1s linear; /* Smooth drag */
-    }
-
-    /* Individual Cube Faces */
-    .cube__face {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: var(--cube-bg);
-      border: 1px solid var(--cube-border);
-      border-radius: 12px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    /* Positioning each face in 3D space */
-    .cube__face--front  { transform: rotateY(  0deg) translateZ(150px); }
-    .cube__face--right  { transform: rotateY( 90deg) translateZ(150px); }
-    .cube__face--back   { transform: rotateY(180deg) translateZ(150px); }
-    .cube__face--left   { transform: rotateY(-90deg) translateZ(150px); }
-    .cube__face--top    { transform: rotateX( 90deg) translateZ(150px); }
-    .cube__face--bottom { transform: rotateX(-90deg) translateZ(150px); }
-
-    /* Typography */
-    h1 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-    }
-    
-    h2 {
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin-bottom: 15px;
-      font-weight: 500;
-    }
-
-    p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 15px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: transparent;
-      color: var(--text-main);
-      border: 1px solid var(--cube-border);
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background-color: var(--text-main);
-      color: var(--bg-color);
-    }
-
-    /* Background UI Hint */
-    .hint {
-      position: absolute;
-      bottom: 40px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      pointer-events: none;
-    }
-  </style>
+      html,body,#app{height:100%;margin:0}
+      #overlay{position:absolute;top:16px;left:16px;color:#fff}
+    </style>
 </head>
 <body>
+<div id="app"></div>
+<div id="overlay"></div>
+<script type="module">
+import * as THREE from 'https://unpkg.com/three@0.158.0/build/three.module.js';
+import { GLTFLoader } from 'https://unpkg.com/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.158.0/examples/jsm/controls/OrbitControls.js';
 
-  <div class="hint">Click and Drag to Rotate</div>
+const container = document.getElementById('app');
+const overlay = document.getElementById('overlay');
 
-  <div class="scene">
-    <div class="cube" id="cube">
-      
-      <!-- FRONT FACE: Profile Intro -->
-      <div class="cube__face cube__face--front">
-        <h1>Guillermo Rayas Monroy</h1>
-        <h2>Software Engineer</h2>
-        <p>Mobile applications, interactive UI/UX, and minimalist 3D design.</p>
-        <a href="#playstore" class="btn">View Play Profile</a>
-      </div>
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x111111);
 
-      <!-- RIGHT FACE: Applications -->
-      <div class="cube__face cube__face--right">
-        <h2>Google Play Apps</h2>
-        <p>Developing interactive educational games for math and science, alongside cultural utility applications like an authentic barrel organ with ad-removal support.</p>
-      </div>
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.1, 100);
+camera.position.set(0, 1.6, 3);
 
-      <!-- BACK FACE: 3D Art -->
-      <div class="cube__face cube__face--back">
-        <h2>3D Modeling & Art</h2>
-        <p>Specializing in custom manual modeling and minimalist relief sculptures using Blender. Bridging the gap between 3D space and web interaction.</p>
-      </div>
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(renderer.domElement);
 
-      <!-- LEFT FACE: Contact -->
-      <div class="cube__face cube__face--left">
-        <h2>Get in Touch</h2>
-        <p>Available for app development, 3D assets, and interactive web projects.</p>
-        <a href="mailto:hello@example.com" class="btn">Email Me</a>
-      </div>
+const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
+scene.add(hemi);
+const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+dir.position.set(5,10,7);
+scene.add(dir);
 
-      <!-- TOP FACE -->
-      <div class="cube__face cube__face--top">
-        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#4a90e2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
-        </svg>
-      </div>
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan = false;
+controls.minDistance = 1.5;
+controls.maxDistance = 6;
+controls.autoRotate = false;
 
-      <!-- BOTTOM FACE -->
-      <div class="cube__face cube__face--bottom">
-        <p style="font-size: 0.8rem; color: var(--cube-border);">GRM | 2026</p>
-      </div>
+const loader = new GLTFLoader();
+loader.load('model.glb', gltf => {
+  const model = gltf.scene;
+  model.traverse(n => { if (n.isMesh) n.castShadow = true; });
+  // center and scale
+  const box = new THREE.Box3().setFromObject(model);
+  const size = box.getSize(new THREE.Vector3()).length();
+  const center = box.getCenter(new THREE.Vector3());
+  model.position.sub(center);
+  model.scale.multiplyScalar(1 / size * 2.0);
+  scene.add(model);
 
-    </div>
-  </div>
+  // map yaw to content
+  function updateOverlay() {
+    const yaw = model.rotation.y % (Math.PI*2);
+    const deg = THREE.MathUtils.radToDeg(yaw);
+    let info = 'Front';
+    if (deg > 45 && deg < 135) info = 'Right panel';
+    else if (deg > 135 || deg < -135) info = 'Back';
+    else if (deg < -45 && deg > -135) info = 'Left panel';
+    overlay.textContent = info;
+  }
 
-  <script>
-    // Logic for dragging and rotating the 3D cube
-    const cube = document.getElementById('cube');
-    let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
-    
-    // Initial rotation state
-    let rotation = { x: -15, y: -25 }; 
-
-    // Handle Start
-    const handleStart = (e) => {
-      isDragging = true;
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-      previousMousePosition = { x: clientX, y: clientY };
-      cube.style.transition = 'none'; // Remove transition during drag for immediate response
-    };
-
-    // Handle Move
-    const handleMove = (e) => {
-      if (!isDragging) return;
-      
-      const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-      const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
-
-      const deltaMove = {
-        x: clientX - previousMousePosition.x,
-        y: clientY - previousMousePosition.y
-      };
-
-      // Adjust rotation speed (lower number = slower rotation)
-      const rotationSpeed = 0.5;
-
-      rotation.y += deltaMove.x * rotationSpeed;
-      rotation.x -= deltaMove.y * rotationSpeed; // Invert Y axis for natural feel
-
-      // Apply the rotation via inline CSS transform
-      cube.style.transform = `translateZ(-150px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
-
-      previousMousePosition = { x: clientX, y: clientY };
-    };
-
-    // Handle End
-    const handleEnd = () => {
-      isDragging = false;
-      cube.style.transition = 'transform 0.1s linear'; // Restore smooth transition
-    };
-
-    // Mouse Events
-    document.addEventListener('mousedown', handleStart);
-    document.addEventListener('mousemove', handleMove);
-    document.addEventListener('mouseup', handleEnd);
-
-    // Touch Events for Mobile
-    document.addEventListener('touchstart', handleStart, {passive: true});
-    document.addEventListener('touchmove', handleMove, {passive: true});
-    document.addEventListener('touchend', handleEnd);
-  </script>
-
+  // sync overlay while user rotates
+  renderer.setAnimationLoop(() => {
+    // if user uses controls, rotate model instead of camera for consistent mapping
+    if (controls.isMouseDown || controls.target) {
+      // optional: apply camera orbit to model rotation
+    }
+    updateOverlay();
+    renderer.render(scene, camera);
+  });
+}, undefined, e => console.error(e));
+window.addEventListener('resize', ()=> {
+  camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
 </body>
 </html>
