@@ -1,89 +1,59 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Guillermo — 3D Profile</title>
-  <style>
-      html,body,#app{height:100%;margin:0}
-      #overlay{position:absolute;top:16px;left:16px;color:#fff}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Profile | Guillermo Rayas Monroy</title>
+    
+    <style>
+        /* Minimalist reset and centering */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f9fa; /* Soft off-white background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        /* Container to frame your 3D cube */
+        .model-container {
+            width: 100%;
+            max-width: 900px;
+            height: 70vh; /* Takes up 70% of the viewport height */
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Essential model-viewer styling */
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent; /* Prevents gray flash on load */
+        }
     </style>
+
+    <script type="module" src="model-viewer.min.js"></script>
 </head>
 <body>
-<div id="app"></div>
-<div id="overlay"></div>
-<script type="module">
-    const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(),
-  new THREE.MeshStandardMaterial({color:0xff0000})
-);
-scene.add(cube);
-import * as THREE from 'https://unpkg.com/three@0.158.0/build/three.module.js';
-import { GLTFLoader } from 'https://unpkg.com/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.158.0/examples/jsm/controls/OrbitControls.js';
 
-const container = document.getElementById('app');
-const overlay = document.getElementById('overlay');
+    <div class="model-container">
+        <model-viewer 
+            src="model.glb" 
+            alt="Interactive 3D Portfolio Cube" 
+            camera-controls 
+            auto-rotate 
+            rotation-per-second="20deg"
+            shadow-intensity="1"
+            interaction-prompt="auto">
+        </model-viewer>
+    </div>
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x111111);
-
-const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.1, 100);
-camera.position.set(0, 1.6, 3);
-
-const renderer = new THREE.WebGLRenderer({antialias:true});
-renderer.setSize(innerWidth, innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-container.appendChild(renderer.domElement);
-
-const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
-scene.add(hemi);
-const dir = new THREE.DirectionalLight(0xffffff, 0.8);
-dir.position.set(5,10,7);
-scene.add(dir);
-
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enablePan = false;
-controls.minDistance = 1.5;
-controls.maxDistance = 6;
-controls.autoRotate = false;
-
-const loader = new GLTFLoader();
-loader.load('model.glb', gltf => {
-  const model = gltf.scene;
-  model.traverse(n => { if (n.isMesh) n.castShadow = true; });
-  // center and scale
-  const box = new THREE.Box3().setFromObject(model);
-  const size = box.getSize(new THREE.Vector3()).length();
-  const center = box.getCenter(new THREE.Vector3());
-  model.position.sub(center);
-  model.scale.multiplyScalar(1 / size * 2.0);
-  scene.add(model);
-
-  // map yaw to content
-  function updateOverlay() {
-    const yaw = model.rotation.y % (Math.PI*2);
-    const deg = THREE.MathUtils.radToDeg(yaw);
-    let info = 'Front';
-    if (deg > 45 && deg < 135) info = 'Right panel';
-    else if (deg > 135 || deg < -135) info = 'Back';
-    else if (deg < -45 && deg > -135) info = 'Left panel';
-    overlay.textContent = info;
-  }
-
-  // sync overlay while user rotates
-  renderer.setAnimationLoop(() => {
-    // if user uses controls, rotate model instead of camera for consistent mapping
-    if (controls.isMouseDown || controls.target) {
-      // optional: apply camera orbit to model rotation
-    }
-    updateOverlay();
-    renderer.render(scene, camera);
-  });
-}, undefined, e => console.error(e));
-window.addEventListener('resize', ()=> {
-  camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
-});
-</script>
 </body>
 </html>
