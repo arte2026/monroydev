@@ -12,7 +12,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #f8f9fa; /* Soft off-white background */
+            background-color: black; /* Soft off-white background */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,8 +24,8 @@
             width: 100%;
             max-width: 900px;
             height: 70vh; /* Takes up 70% of the viewport height */
-            background: #ffffff;
-            border-radius: 16px;
+            background: aqua;
+            border-radius: 5px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             padding: 20px;
@@ -49,6 +49,8 @@
             alt="Interactive 3D Portfolio Cube" 
             camera-controls 
             auto-rotate 
+            camera-orbit="0deg 90deg 6m"
+                      disable-zoom
             rotation-per-second="20deg"
             shadow-intensity="1"
             interaction-prompt="auto">
