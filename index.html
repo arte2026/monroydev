@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Guillermo R. Monroy — Web developer and 3D modeling enthusiast. Showcasing creative Android and Microsoft Store Aplications, modern portfolio designs, and interactive 3D projects built with Blender." />
     <title>Developer Profile | Guillermo R. Monroy</title>
+    <link rel= "icon" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script type="module" src="model-viewer.min.js"></script>
 </head>
 <body>
+<div id="welcomeScreen" class="welcome-screen">
 
+  <div class="welcome-content" >
+
+    <img src="gallery.png" id="enterBtn"  alt="Gallery Entrance">
+
+  </div>
+
+</div>
+    
     <div class="model-container">
         <model-viewer 
             src="model.glb" 
@@ -23,9 +33,10 @@
             rotation-per-second="10deg"
             shadow-intensity="3"
             interaction-prompt="auto"
-            disable-tap>
+            disable-tap
+                      >
         </model-viewer>
     </div>
-
+<script src="script.js"></script>
 </body>
 </html>
