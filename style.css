@@ -6,28 +6,9 @@
             height: 100%;
            background-image: url(untitled.png); 
             background-size: auto 100%;
-            display: flex;
             justify-content: center;
             align-items: center;
             font-family: Candara, sans-serif;
-        }
-
-        /* Container to frame your 3D cube */
-        .model-container {
-            width: 100%;
-            max-width: 900px;
-            height: 80vh; /* Takes up 70% of the viewport height */
-            background: transparent;
-            border-radius: 5px;
-            overflow: hidden;
-            padding: 1px;
-        }
-
-        /* Essential model-viewer styling */
-        model-viewer {
-            width: 100%;
-            height: 100%;
-            --poster-color: transparent; /* Prevents gray flash on load */
         }
 .welcome-screen {
     width: 100%;
@@ -41,9 +22,7 @@
 }
 
 .welcome-content{
-    
     object-fit: cover;
-    
 }
 
 .welcome-content img {
@@ -56,4 +35,125 @@
 .welcome-screen.fade-out {
   opacity: 0;
   transition: opacity 0.9s ease;
+}
+        /* Container to frame your 3D cube */
+        .model-container {
+            width: 100%;
+            height: 80vh; /* Takes up 70% of the viewport height */
+            background: transparent;
+            border-radius: 5px;
+            overflow: hidden;
+            padding: 1px;
+            display: flex;
+        }
+        /* Essential model-viewer styling */
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            --poster-color: transparent; /* Prevents gray flash on load */
+            /* 💡 FORCE BACK-FACING HOTSPOTS TO ZERO OPACITY */
+    --min-hotspot-opacity: 0;
+        }
+
+header{
+    width: 100%;
+    background: rgba( 0, 0, 0, 0.5);
+    color: snow;
+    text-align: center;
+    padding: 10px
+}
+
+/* The active dot on the cube surface */
+.hotspot-card {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    background-color: #4CAF50; /* Clean Android Green */
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* The popup box (hidden by default) */
+.annotation-box {
+    display: none; /* Hide until hovered */
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1a1d24; /* Slate dark mode background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 16px;
+    width: 220px;
+    text-align: center;
+    color: yellow; /* Vibrant green accent */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    font-family: Candara, sans-serif;
+}
+
+/* 🌟 Show the full card when the user hovers over the dot */
+.hotspot-card:hover .annotation-box {
+    display: block;
+}
+
+/* Styling elements inside your hotspot */
+.annotation-box h4 {
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    font-family: Candara, sans-serif;
+}
+
+.pop-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    border: 1px groove black;
+}
+
+/* Button link formatting */
+.pop-link {
+    display: block;
+    text-align: center;
+    background-color: #2196F3; /* App link blue */
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.pop-link:hover {
+    background-color: #1976D2;
+}
+
+/* Hide everything when the face rotates away behind the model */
+.hotspot-card:not([data-visible]) .annotation-box {
+    display: none;
+    opacity: 0 !important;
+    pointer-events: none; /* Prevents users from accidentally clicking invisible buttons */
+    transform: scale(0);  /* Shrinks it out of existence */
+}
+
+footer{
+    bottom: 1px;
+    width: 100%;
+    padding: 10px;
+    background: rgba( 0, 0, 0, 0.5);
+    color: snow;
+    text-align: center;
+    position: fixed;
+}
+footer a {
+    color: yellow
+}
+.ppolicy{
+    margin: 0px 20px;
+    padding: 30px;
+    color: white;
+    text-align: center;
 }
