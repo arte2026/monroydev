@@ -14,10 +14,3 @@ welcomeScreen.addEventListener("click", () => {
   enterBtn.click();
 });
 
-    // Grab your model viewer element
-    const viewer = document.querySelector("model-viewer");
-    
-    // Explicitly enforce the neutral lighting setup via JS API
-    viewer.addEventListener("load", () => {
-        viewer.environmentImage = "neutral";
-    });
