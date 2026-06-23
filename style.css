@@ -7,6 +7,8 @@
             justify-content: center;
             align-items: center;
             font-family: Candara, sans-serif;
+            background-image: url(space.jpg);
+            background-repeat: repeat;
         }
 .welcome-screen {
     width: 100%;
@@ -40,11 +42,14 @@
             height: 100vh; /* Takes up 70% of the viewport height */
             overflow: hidden;
             display: flex;
+            background: transparent; 
         }
         /* Essential model-viewer styling */
         model-viewer {
             width: 100%;
             height: 100%;
+            background: transparent; 
+    --poster-color: transparent;
             /* 💡 FORCE BACK-FACING HOTSPOTS TO ZERO OPACITY */
     --min-hotspot-opacity: 0;
         }
