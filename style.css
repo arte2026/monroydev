@@ -1,4 +1,4 @@
-  /* Minimalist reset and centering */
+/* Minimalist reset and centering */
         body, html {
             margin: 0;
             padding: 0;
@@ -8,48 +8,20 @@
             align-items: center;
             font-family: Candara, sans-serif;
             background-image: url(space.jpg);
-            background-repeat: repeat;
+            background-size: cover;
         }
-.welcome-screen {
-    width: 100%;
-    height: 100%;
-  position: fixed;
-  align-items: center;
-  z-index: 9999;
-    background-color: black;
-    display: flex;
-    justify-content: center; 
-}
-
-.welcome-content{
-    object-fit: cover;
-}
-
-.welcome-content img {
-  width: 100%;
-    height: 100%;
-  align-items: center; 
-    max-width: 1080px;
-}
-
-.welcome-screen.fade-out {
-  opacity: 0;
-  transition: opacity 0.9s ease;
-}
         /* Container to frame your 3D cube */
         .model-container {
             width: 100%;
             height: 100vh; /* Takes up 70% of the viewport height */
             overflow: hidden;
             display: flex;
-            background: transparent; 
         }
         /* Essential model-viewer styling */
         model-viewer {
             width: 100%;
             height: 100%;
-            background: transparent; 
-    --poster-color: transparent;
+            
             /* 💡 FORCE BACK-FACING HOTSPOTS TO ZERO OPACITY */
     --min-hotspot-opacity: 0;
         }
@@ -62,7 +34,7 @@ header{
     text-align: center;
     padding: 10px;
     position: fixed;
-    z-index: 2;
+    z-index: 2
 }
 
 /* The active dot on the cube surface */
@@ -159,30 +131,31 @@ footer a {
     color: white;
     text-align: center;
 }
+.progress-bar {
+  display: block;
+  width: 33%;
+  height: 10%;
+  max-height: 2%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border-radius: 25px;
+  box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 .progress-bar.hide {
-    visibility: hidden;
-    transition: visibility 0.3s;
+  visibility: hidden;
+  transition: visibility 0.3s;
 }
-.progress-bar {
-    display: block;
-    width: 33%;
-    height: 10%;
-    max-height: 2%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0px);
-    border-radius: 25px;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px 3px, rgba(0, 0, 0, 0.6) 0px 0px 5px 1px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    background-color: rgba(0, 0, 0, 0.5);
-}
+
 .update-bar {
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 0%;
-    height: 100%;
-    border-radius: 25px;
-    float: left;
-    transition: width 0.3s;
+  background-color: yellow;
+  width: 0%;
+  height: 100%;
+  border-radius: 25px;
+  float: left;
+  transition: width 0.3s;
 }
