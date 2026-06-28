@@ -149,6 +149,9 @@ footer a {
 .progress-bar.hide {
   visibility: hidden;
   transition: visibility 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
 }
 
 .update-bar {
