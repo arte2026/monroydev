@@ -10,6 +10,14 @@
             background-image: url(space.jpg);
             background-size: cover;
         }
+.centerback{
+    position: fixed;
+    top: 15%;
+    left: 40%;
+    text-align: center;
+    align-items: center;
+    color: snow;
+}
         /* Container to frame your 3D cube */
         .model-container {
             width: 100%;
