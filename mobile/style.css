@@ -7,7 +7,7 @@
             justify-content: center;
             align-items: center;
             font-family: Candara, sans-serif;
-            background: linear-gradient(0deg, #171232, #31276e)
+            background: linear-gradient(0deg, #0c1833, #193065)
         }
         /* Container to frame your 3D cube */
         .model-container {
