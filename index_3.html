@@ -40,7 +40,7 @@
             disable-pan
             auto-rotate 
             camera-orbit="90deg 90deg auto"
-            
+            id="earthmat"
             autoplay 
             disable-zoom
             rotation-per-second="3deg"
@@ -52,9 +52,11 @@
               <div class="progress-bar" slot="progress-bar">
     <div class="update-bar"></div>
   </div>   
-	 
+	 <div class="controls glass">
+                    <div>Variant: <custom-select id="variant"></custom-select></div>
+                  </div>
             <effect-composer>
-			<outline-effect color="blue" blend-mode="skip"></outline-effect>
+			<outline-effect id="earthmat" color="blue" blend-mode="skip"></outline-effect>
                 <ssao-effect strength="8"></ssao-effect>  
                 
                 <bloom-effect strength="2"></bloom-effect>
@@ -69,7 +71,31 @@
 	
     Guillermo R Monroy - ver. 1.8 2026 - <a href="index.html" target="_self"> GO BACK</a>
     </footer>
-    
+    <script >
+	<script>
+                  const modelViewerVariants = document.querySelector("model-viewer#earthmat");
+                  const select = document.querySelector('#variant');
+
+                  modelViewerVariants.addEventListener('load', () => {
+                    const names = modelViewerVariants.availableVariants;
+                    for (const name of names) {
+                      const option = document.createElement('option');
+                      option.value = name;
+                      option.textContent = name;
+                      select.appendChild(option);
+                    }
+                    // Adds a default option.
+                    const option = document.createElement('option');
+                    option.value = 'default';
+                    option.textContent = 'Default';
+                    select.appendChild(option);
+                  });
+
+                  select.addEventListener('input', (event) => {
+                    modelViewerVariants.variantName = event.target.value === 'default' ? null : event.target.value;
+                  });
+                </script>
+	</script>
     <script src="script.js"></script>
 
 </body>
