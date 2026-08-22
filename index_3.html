@@ -40,7 +40,7 @@
             disable-pan
             auto-rotate 
             camera-orbit="90deg 90deg auto"
-            id="earthmat portfolio-cube"
+            id="portfolio-cube"
             autoplay 
             disable-zoom
             rotation-per-second="3deg"
@@ -92,27 +92,7 @@ viewer.addEventListener('load', () => {
         }
     }
 });
-                  const modelViewerVariants = document.querySelector("model-viewer#earthmat");
-                  const select = document.querySelector('#variant');
-
-                  modelViewerVariants.addEventListener('load', () => {
-                    const names = modelViewerVariants.availableVariants;
-                    for (const name of names) {
-                      const option = document.createElement('option');
-                      option.value = name;
-                      option.textContent = name;
-                      select.appendChild(option);
-                    }
-                    // Adds a default option.
-                    const option = document.createElement('option');
-                    option.value = 'default';
-                    option.textContent = 'Default';
-                    select.appendChild(option);
-                  });
-
-                  select.addEventListener('input', (event) => {
-                    modelViewerVariants.variantName = event.target.value === 'default' ? null : event.target.value;
-                  });
+                 
                 
 	</script>
     <script src="script.js"></script>
