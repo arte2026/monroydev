@@ -27,7 +27,7 @@
 <body>
 
     <header >
-    Earth 3D Viewer
+    🌎 Earth 3D Viewer
     </header>
     <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
     
@@ -53,11 +53,11 @@
     <div class="update-bar"></div>
   </div>   
 	 <div class="variant-buttons">
-    <button id="variant1">Earth Day</button>
-    <button id="variant2">Earth Night</button>
+    <button id="earthButton">Earth</button>
+    <button id="nightButton">Night</button>
 </div>
             <effect-composer>
-			<outline-effect color="#00A2E8" blend-mode="default" strength="2" opacity="0.8" smoothing="2"></outline-effect>           
+			<outline-effect color="#00A2E8" blend-mode="default" strength="3" opacity="0.8" smoothing="3"></outline-effect>           
             <bloom-effect strength="1"></bloom-effect>
             <color-grade-effect></color-grade-effect>
             </effect-composer>
@@ -73,22 +73,15 @@
     <script type="module">
 	const viewer = document.querySelector('#portfolio-cube');
 
-const variant1Button = document.querySelector('#variant1');
-const variant2Button = document.querySelector('#variant2');
+const earthButton = document.querySelector('#earthButton');
+const nightButton = document.querySelector('#nightButton');
 
-viewer.addEventListener('load', () => {
-    console.log('Available variants:', viewer.availableVariants);
-
-    // Set the initial variant
-    viewer.variantName = viewer.availableVariants[0];
+earthButton.addEventListener('click', () => {
+    viewer.variantName = 'Earth1';
 });
 
-variant1Button.addEventListener('click', () => {
-    viewer.variantName = viewer.availableVariants[0];
-});
-
-variant2Button.addEventListener('click', () => {
-    viewer.variantName = viewer.availableVariants[1];
+nightButton.addEventListener('click', () => {
+    viewer.variantName = 'Night1';
 });
 	</script>
     <script src="script.js"></script>
