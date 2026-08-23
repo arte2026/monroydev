@@ -27,7 +27,7 @@
 <body>
 
     <header >
-    Earth 3D View
+    Earth 3D Viewer
     </header>
     <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
     
@@ -46,21 +46,20 @@
             rotation-per-second="3deg"
             shadow-intensity="0"
             interaction-prompt="auto"
-            environment-image="neutral_HDR.jpg"
+            environment-image="neutral.jpg"
             exposure="1"
             disable-tap>
               <div class="progress-bar" slot="progress-bar">
     <div class="update-bar"></div>
   </div>   
 	 <div class="controls glass">
-                    <div>Variant: <custom-select id="variant"></custom-select></div>
+                    <div>Variant: <custom-select id="variant"></custom-select>
+					</div>
                   </div>
             <effect-composer>
-			<outline-effect color="#0000ff" blend-mode="default" strength="1"></outline-effect>
-                <ssao-effect strength="8"></ssao-effect>  
-                
-                <bloom-effect strength="2"></bloom-effect>
-                <color-grade-effect></color-grade-effect>
+			<outline-effect color="#00A2E8" blend-mode="default" strength="2" opacity="0.8" smoothing="2"></outline-effect>           
+            <bloom-effect strength="2"></bloom-effect>
+            <color-grade-effect></color-grade-effect>
             </effect-composer>
             
         </model-viewer>
@@ -69,7 +68,7 @@
 	
     <footer>
 	
-    Guillermo R Monroy - ver. 1.8 2026 - <a href="index.html" target="_self"> GO BACK</a>
+    Guillermo R Monroy - 2026 - <a href="index.html" target="_self"> GO BACK</a>
     </footer>
     
     <script src="script.js"></script>
