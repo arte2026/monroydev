@@ -21,13 +21,16 @@
     
     <script type="module" src="model-viewer-module.min.js"></script>
 
-                  <script type="module" src="model-viewer-effects.min.js"></script>
+ <script type="module" src="model-viewer-effects.min.js"></script>
     
 </head>
 <body>
 
     <header >
-    🌎 Earth 3D Viewer
+    🌎 Earth 3D Viewer<div class="variant-buttons">
+    <button id="earthButton">Earth</button>
+    <button id="nightButton">Night</button>
+</div>
     </header>
     <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
     
@@ -56,10 +59,10 @@
     <button id="earthButton">Earth</button>
     <button id="nightButton">Night</button>
 </div>
-            <effect-composer>
-			<outline-effect color="#00A2E8" blend-mode="default" strength="3" opacity="0.8" smoothing="3"></outline-effect>           
-            <bloom-effect strength="1"></bloom-effect>
-            <color-grade-effect></color-grade-effect>
+  <effect-composer>
+  <outline-effect color="#00A2E8" blend-mode="default" strength="3" opacity="0.8" smoothing="3"></outline-effect>           
+  <bloom-effect strength="1"></bloom-effect>
+  <color-grade-effect></color-grade-effect>
             </effect-composer>
             
         </model-viewer>
