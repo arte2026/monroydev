@@ -172,7 +172,7 @@ font-family: Candara, sans-serif;
     color: white;
     text-decoration: none;
     padding: 2px 15px;
-    border-radius: 12px;
+    border: none;
     font-size: 16px;
     transition: background 0.2s ease;
     margin-top: 8px;
