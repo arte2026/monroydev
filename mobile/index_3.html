@@ -15,9 +15,11 @@
 <body>
 
     <header >
-    Earth 3D Viewer
+    🌎 Earth 3D Viewer - Select Layout:<br>
+    <button id="earthButton" class="variant-buttons">🌞 Day</button>
+    <button id="nightButton" class="variant-buttons">🌜 Night</button>
+
     </header>
-    <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
     
     <div class="model-container">
         <model-viewer 
@@ -39,11 +41,7 @@
             disable-tap>
               <div class="progress-bar" slot="progress-bar">
     <div class="update-bar"></div>
-  </div>   
-	 <div class="variant-buttons">
-    <button id="variant1">Earth Day</button>
-    <button id="variant2">Earth Night</button>
-</div>          
+  </div>           
             
         </model-viewer>
 		
@@ -56,22 +54,15 @@
     <script type="module">
 	const viewer = document.querySelector('#portfolio-cube');
 
-const variant1Button = document.querySelector('#variant1');
-const variant2Button = document.querySelector('#variant2');
+const earthButton = document.querySelector('#earthButton');
+const nightButton = document.querySelector('#nightButton');
 
-viewer.addEventListener('load', () => {
-    console.log('Available variants:', viewer.availableVariants);
-
-    // Set the initial variant
-    viewer.variantName = viewer.availableVariants[0];
+earthButton.addEventListener('click', () => {
+    viewer.variantName = 'Earth1';
 });
 
-variant1Button.addEventListener('click', () => {
-    viewer.variantName = viewer.availableVariants[0];
-});
-
-variant2Button.addEventListener('click', () => {
-    viewer.variantName = viewer.availableVariants[1];
+nightButton.addEventListener('click', () => {
+    viewer.variantName = 'Night1';
 });
 	</script>
     <script src="script.js"></script>
