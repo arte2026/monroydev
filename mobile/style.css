@@ -36,7 +36,9 @@ header{
     position: fixed;
     z-index: 2
 }
-
+header a {
+    color: yellow
+}
 /* The active dot on the cube surface */
 .hotspot-card {
     width: 50px;
