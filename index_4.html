@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guillermo R. Monroy — Web developer and 3D modeling enthusiast. Showcasing creative Android and Microsoft Store Aplications, modern portfolio designs, and interactive 3D projects built with Blender." />
+    <title>3D Museum Gallery</title>
+    <link rel= "icon" href="favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="style.css"> 
+ 
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+      {
+          "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@^0.183.0/build/three.module.min.js"
+  }
+      }
+    </script>
+    
+    <script type="module" src="model-viewer-module.min.js"></script>
+
+ <script type="module" src="model-viewer-effects.min.js"></script>
+   
+<style>
+    body {
+      margin: 0;
+      background-color: #121214;
+      font-family: system-ui, sans-serif;
+      overflow: hidden;
+    }
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
+    }
+    .gallery-nav {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      background: rgba(20, 20, 25, 0.7);
+      backdrop-filter: blur(12px);
+      padding: 10px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 10;
+    }
+    .model-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid transparent;
+      color: #e0e0e0;
+      padding: 8px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .model-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+    .model-btn.active {
+      background: #ffffff;
+      color: #121214;
+      font-weight: 600;
+    }
+    .hotspot-card {
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+   
+</head>
+<body>
+
+    <header >
+     3D Museum Gallery | Select Models: 
+    </header>
+    <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
+    
+	<div class="gallery-nav">
+    <button class="model-btn active" onclick="loadModel('earth')">Planet Earth</button>
+    <button class="model-btn" onclick="loadModel('trex')">T-Rex Skeleton</button>
+    
+  </div>
+	
+    <div class="model-container">
+        <model-viewer 
+            src="torso.glb" 
+            alt="Earth 3D View" 
+            camera-controls 
+            skybox-image="stars.jpg"
+            disable-pan
+            auto-rotate 
+            camera-orbit="90deg 90deg auto"
+            id="portfolio-cube"
+            autoplay 
+            disable-zoom
+            rotation-per-second="3deg"
+            shadow-intensity="0"
+            interaction-prompt="auto"
+            environment-image="neutral.jpg"
+            exposure="1"
+            disable-tap>
+              <div class="progress-bar" slot="progress-bar">
+    <div class="update-bar"></div>
+  </div>   
+	 
+  <effect-composer>           
+  <bloom-effect strength="1"></bloom-effect>
+  <color-grade-effect></color-grade-effect>
+            </effect-composer>
+            
+        </model-viewer>
+		
+    </div>
+	
+    <footer>
+    Guillermo R Monroy - 2026 - <a href="index.html" target="_self"> GO BACK</a>
+    </footer>
+	
+    <script>
+    const viewer = document.querySelector('#mainViewer');
+    const hotspotContainer = document.querySelector('#hotspotContainer');
+    const buttons = document.querySelectorAll('.model-btn');
+
+    // Data registry for models, lighting, and custom hotspots
+    const modelData = {
+      earth: {
+        src: 'torso.glb',
+        exposure: '1.0',
+        shadowIntensity: '0',
+        hotspots: [
+          { slot: 'hotspot-1', pos: '0.58m 0.60m 0.55m', normal: '0.58m 0.60m 0.55m', text: 'Atmosphere Boundary' }
+        ]
+      },
+      trex: {
+        src: '2snake.glb',
+        exposure: '1.2',
+        shadowIntensity: '1.5',
+        hotspots: [
+          { slot: 'hotspot-1', pos: '0.1m 1.4m 0.8m', normal: '0m 1m 0m', text: 'Cranial Fossil' },
+          { slot: 'hotspot-2', pos: '-0.2m 0.9m -0.5m', normal: '0m 0m 1m', text: 'Vertebral Column' }
+        ]
+      },
+      
+    };
+
+    function loadModel(key) {
+      const data = modelData[key];
+      if (!data) return;
+
+      // Update button active state
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Update model source and environment settings
+      viewer.src = data.src;
+      viewer.exposure = data.exposure;
+      viewer.shadowIntensity = data.shadowIntensity;
+
+      // Reset camera to frame new model bounds
+      viewer.cameraOrbit = 'auto auto auto';
+      viewer.cameraTarget = 'auto auto auto';
+
+      // Clear previous hotspots and inject new ones
+      hotspotContainer.innerHTML = '';
+      if (data.hotspots) {
+        data.hotspots.forEach(hp => {
+          const btn = document.createElement('button');
+          btn.slot = hp.slot;
+          btn.dataset.position = hp.pos;
+          if (hp.normal) btn.dataset.normal = hp.normal;
+          btn.className = 'hotspot-card';
+          btn.textContent = hp.text;
+          hotspotContainer.appendChild(btn);
+        });
+      }
+    }
+  </script>
+    <script src="script.js"></script>
+
+</body>
+</html>
