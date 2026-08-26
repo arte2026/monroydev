@@ -24,16 +24,7 @@
  <script type="module" src="model-viewer-effects.min.js"></script>
    
 <style>
-    body {
-      margin: 0;
-      background-color: #121214;
-      font-family: system-ui, sans-serif;
-      overflow: hidden;
-    }
-    model-viewer {
-      width: 100vw;
-      height: 100vh;
-    }
+    
     .gallery-nav {
       position: absolute;
       bottom: 24px;
@@ -86,8 +77,8 @@
     <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
     
 	<div class="gallery-nav">
-    <button class="model-btn active" onclick="loadModel('earth')">Planet Earth</button>
-    <button class="model-btn" onclick="loadModel('trex')">T-Rex Skeleton</button>
+    <button class="model-btn active" onclick="loadModel('earth')">Torso</button>
+    <button class="model-btn" onclick="loadModel('trex')">Snake</button>
     
   </div>
 	
@@ -100,7 +91,8 @@
             disable-pan
             auto-rotate 
             camera-orbit="90deg 90deg auto"
-            id="portfolio-cube"
+			max-camera-orbit="auto 90deg auto"
+            id="mainViewer"
             autoplay 
             disable-zoom
             rotation-per-second="3deg"
@@ -135,16 +127,14 @@
     const modelData = {
       earth: {
         src: 'torso.glb',
-        exposure: '1.0',
-        shadowIntensity: '0',
+        
         hotspots: [
           { slot: 'hotspot-1', pos: '0.58m 0.60m 0.55m', normal: '0.58m 0.60m 0.55m', text: 'Atmosphere Boundary' }
         ]
       },
       trex: {
         src: '2snake.glb',
-        exposure: '1.2',
-        shadowIntensity: '1.5',
+        
         hotspots: [
           { slot: 'hotspot-1', pos: '0.1m 1.4m 0.8m', normal: '0m 1m 0m', text: 'Cranial Fossil' },
           { slot: 'hotspot-2', pos: '-0.2m 0.9m -0.5m', normal: '0m 0m 1m', text: 'Vertebral Column' }
