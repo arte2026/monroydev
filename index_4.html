@@ -76,11 +76,7 @@
     </header>
     <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
     
-	<div class="gallery-nav">
-    <button class="model-btn active" onclick="loadModel('earth')">Torso</button>
-    <button class="model-btn" onclick="loadModel('trex')">Snake</button>
-    
-  </div>
+	
 	
     <div class="model-container">
         <model-viewer 
@@ -115,7 +111,12 @@
     </div>
 	
     <footer>
-    Guillermo R Monroy - 2026 - <a href="index.html" target="_self"> GO BACK</a>
+	<div>
+    <button class="model-btn active" onclick="loadModel('earth')">Aztec Snake</button>
+    <button class="model-btn" onclick="loadModel('trex')">Toltec Atlantean</button>
+    
+  </div>
+    
     </footer>
 	
     <script>
@@ -126,14 +127,14 @@
     // Data registry for models, lighting, and custom hotspots
     const modelData = {
       earth: {
-        src: 'atlante.glb',
+        src: '2snake.glb',
         
         hotspots: [
           { slot: 'hotspot-1', pos: '0.58m 0.60m 0.55m', normal: '0.58m 0.60m 0.55m', text: 'Atmosphere Boundary' }
         ]
       },
       trex: {
-        src: '2snake.glb',
+        src: 'atlante.glb',
         
         hotspots: [
           { slot: 'hotspot-1', pos: '0.1m 1.4m 0.8m', normal: '0m 1m 0m', text: 'Cranial Fossil' },
