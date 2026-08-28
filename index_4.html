@@ -86,39 +86,40 @@
 
     // Update button active state
     buttons.forEach(btn => btn.classList.remove('active'));
-    // Pass 'event' or use a safer approach for the active class if needed, 
-    // but assuming your inline onclick="loadModel('snake')" triggers this:
     if (window.event && window.event.target) {
         window.event.target.classList.add('active');
     }
 
-    // Update model source
+    // Update model source and reset camera
     viewer.src = data.src;
-
-    // Reset camera
     viewer.cameraOrbit = 'auto auto auto';
     viewer.cameraTarget = 'auto auto auto';
 
-    // 1. Find and remove ONLY the old hotspots (leaves the progress bar intact)
+    // 1. Find and remove ONLY the old hotspots
     const existingHotspots = viewer.querySelectorAll('.hotspot-card');
     existingHotspots.forEach(hp => hp.remove());
 
-    // 2. Inject new hotspots directly into the model-viewer
+    // 2. Inject new hotspots with the nested annotation box
     if (data.hotspots) {
         data.hotspots.forEach(hp => {
+            // Create the main hotspot button
             const btn = document.createElement('button');
             btn.slot = hp.slot;
-            
-            // Use setAttribute to guarantee the web component reads the coordinates
+            btn.className = 'hotspot-card';
             btn.setAttribute('data-position', hp.pos);
             if (hp.normal) {
                 btn.setAttribute('data-normal', hp.normal);
             }
             
-            btn.className = 'hotspot-card';
-            btn.textContent = hp.text;
+            // Create the inner div for the annotation
+            const annotationBox = document.createElement('div');
+            annotationBox.className = 'annotation-box';
+            annotationBox.textContent = hp.text;
             
-            // Append directly to the viewer, NOT a container div
+            // Put the div inside the button
+            btn.appendChild(annotationBox);
+            
+            // Append the fully constructed button to the viewer
             viewer.appendChild(btn); 
         });
     }
