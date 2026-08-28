@@ -73,7 +73,7 @@
         src: 'atlante.glb',
         
         hotspots: [
-          { slot: 'hotspot-1', pos: '0.1m 1.4m 0.8m', normal: '0m 1m 0m', text: 'Cranial Fossil' },
+          { slot: 'hotspot-1', pos: '9.35395615715521m 17.30274669925037m -1.2658335185240217m', normal: '0.9571651115087653m 0.28895694041163034m 0.018407495711331462m', text: 'Toltec Atlantean <br>The Atlantean figures are four anthropomorphic, hand-carved stone statues, belonging to the Toltec culture.  The construction of the Toltec empire has been dated to approximately 750 CE. This date mark the earliest time that the figures could have been carved.' },
           
         ]
       },
@@ -107,6 +107,8 @@
             btn.slot = hp.slot;
             btn.className = 'hotspot-card';
             btn.setAttribute('data-position', hp.pos);
+			// Add the visibility attribute here
+            btn.setAttribute('data-visibility-attribute', 'visible');
             if (hp.normal) {
                 btn.setAttribute('data-normal', hp.normal);
             }
