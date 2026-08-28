@@ -178,7 +178,7 @@ footer a {
 
 .variant-buttons{
     text-align: center;
-    background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
     text-decoration: none;
     padding: 2px 15px;
@@ -186,16 +186,22 @@ footer a {
     transition: background 0.2s ease;
 	margin-left: 10px;
 	border: none;
+	border-radius: 5px;
 }
+.variant-buttons:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
 .model-btn {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid transparent;
       color: white;
       padding: 8px 18px;
-      border-radius: 20px;
+      border-radius: 5px;
       cursor: pointer;
       font-weight: 500;
       transition: all 0.2s ease;
+	  margin-left: 10px;
     }
     .model-btn:hover {
       background: rgba(255, 255, 255, 0.25);
