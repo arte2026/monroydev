@@ -42,7 +42,7 @@
               <div class="progress-bar" slot="progress-bar">
     <div class="update-bar"></div>
   </div>   
-            <div id="hotspotContainer"></div>
+            
         </model-viewer>
 		
     </div>
@@ -57,7 +57,7 @@
 	
     <script>
     const viewer = document.querySelector('#mainViewer');
-    const hotspotContainer = document.querySelector('#hotspotContainer');
+    
     const buttons = document.querySelectorAll('.model-btn');
 
     // Data registry for models, lighting, and custom hotspots
@@ -66,7 +66,7 @@
         src: '2snake.glb',
         
         hotspots: [
-          { slot: 'hotspot-1', pos:'-0.2519135091863802m -6.6936707720453m -0.020509003591680397m', normal:'-0.9999019462189667m -0.013919839628185963m -0.0015284018608544357m', text: 'Atmosphere Boundary' }
+          { slot: 'hotspot-1', pos:'-0.2562244535185485m -6.023097880556989m 0.19834495610086167m', normal:'-0.9999019462189667m -0.013919839628185963m -0.0015284018608544357m', text: 'Atmosphere Boundary' }
         ]
       },
       toltec: {
