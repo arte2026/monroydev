@@ -176,6 +176,27 @@ footer a {
     font-size: 16px;
     transition: background 0.2s ease;
 	margin-left: 10px;
+	margin-top: 5px;
 	border: none;
 	border-radius: 5px;
 }
+.model-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid transparent;
+      color: white;
+      padding: 8px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+	  margin-left: 10px;
+    }
+    .model-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+    .model-btn.active {
+      background: #ffffff;
+      color: #121214;
+      font-weight: 600;
+    }
