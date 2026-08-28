@@ -11,30 +11,6 @@
 
  <script type="module" src="mobile/model-viewer.min.js"></script>
    
-<style>
-    
-    .model-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid transparent;
-      color: #e0e0e0;
-      padding: 8px 18px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-    .model-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      color: #fff;
-    }
-    .model-btn.active {
-      background: #ffffff;
-      color: #121214;
-      font-weight: 600;
-    }
-    
-  </style>
-   
 </head>
 <body>
 
@@ -42,13 +18,11 @@
      3D Museum Gallery | 3D models created by Guillermo R Monroy
     </header>
     <div class="centerback"><h1>⏳ Loading 3D Scene...</h1></div>
-    
-	
 	
     <div class="model-container">
         <model-viewer 
             src="2snake.glb" 
-            alt="Earth 3D View" 
+            alt="Aztec Snake" 
             camera-controls 
             skybox-image="museum.jpg"
             disable-pan
@@ -75,8 +49,8 @@
 	
     <footer>
 	<div>
-    <button class="model-btn active" onclick="loadModel('earth')">Aztec Snake</button>
-    <button class="model-btn" onclick="loadModel('trex')">Toltec Atlantean</button>
+    <button class="model-btn active" onclick="loadModel('snake')">Aztec Snake</button>
+    <button class="model-btn" onclick="loadModel('toltec')">Toltec Atlantean</button>
   </div>
     
     </footer>
@@ -88,14 +62,14 @@
 
     // Data registry for models, lighting, and custom hotspots
     const modelData = {
-      earth: {
+      snake: {
         src: '2snake.glb',
         
         hotspots: [
           { slot: 'hotspot-1', pos:'-0.2519135091863802m -6.6936707720453m -0.020509003591680397m', normal:'-0.9999019462189667m -0.013919839628185963m -0.0015284018608544357m', text: 'Atmosphere Boundary' }
         ]
       },
-      trex: {
+      toltec: {
         src: 'atlante.glb',
         
         hotspots: [
@@ -107,34 +81,48 @@
     };
 
     function loadModel(key) {
-      const data = modelData[key];
-      if (!data) return;
+    const data = modelData[key];
+    if (!data) return;
 
-      // Update button active state
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-
-      // Update model source and environment settings
-      viewer.src = data.src;
-
-      // Reset camera to frame new model bounds
-      viewer.cameraOrbit = 'auto auto auto';
-      viewer.cameraTarget = 'auto auto auto';
-
-      // Clear previous hotspots and inject new ones
-      hotspotContainer.innerHTML = '';
-      if (data.hotspots) {
-        data.hotspots.forEach(hp => {
-          const btn = document.createElement('button');
-          btn.slot = hp.slot;
-          btn.dataset.position = hp.pos;
-          if (hp.normal) btn.dataset.normal = hp.normal;
-          btn.className = 'hotspot-card';
-          btn.textContent = hp.text;
-          hotspotContainer.appendChild(btn);
-        });
-      }
+    // Update button active state
+    buttons.forEach(btn => btn.classList.remove('active'));
+    // Pass 'event' or use a safer approach for the active class if needed, 
+    // but assuming your inline onclick="loadModel('snake')" triggers this:
+    if (window.event && window.event.target) {
+        window.event.target.classList.add('active');
     }
+
+    // Update model source
+    viewer.src = data.src;
+
+    // Reset camera
+    viewer.cameraOrbit = 'auto auto auto';
+    viewer.cameraTarget = 'auto auto auto';
+
+    // 1. Find and remove ONLY the old hotspots (leaves the progress bar intact)
+    const existingHotspots = viewer.querySelectorAll('.hotspot-card');
+    existingHotspots.forEach(hp => hp.remove());
+
+    // 2. Inject new hotspots directly into the model-viewer
+    if (data.hotspots) {
+        data.hotspots.forEach(hp => {
+            const btn = document.createElement('button');
+            btn.slot = hp.slot;
+            
+            // Use setAttribute to guarantee the web component reads the coordinates
+            btn.setAttribute('data-position', hp.pos);
+            if (hp.normal) {
+                btn.setAttribute('data-normal', hp.normal);
+            }
+            
+            btn.className = 'hotspot-card';
+            btn.textContent = hp.text;
+            
+            // Append directly to the viewer, NOT a container div
+            viewer.appendChild(btn); 
+        });
+    }
+}
   </script>
     <script src="script.js"></script>
 
