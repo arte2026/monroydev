@@ -11,7 +11,7 @@
             align-items: center;
             font-family: "Inter", sans-serif;
             background-image: url(space.jpg);
-            background-size: cover;
+            background-size: contain;
         }
 		
 .centerback{
