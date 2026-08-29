@@ -115,7 +115,7 @@ header a {
 }
 
 .pop-link:hover {
-    background-color: #1976D2;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Hide everything when the face rotates away behind the model */
