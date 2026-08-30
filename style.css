@@ -79,7 +79,7 @@ header a {
     text-align: center;
     color: white; /* Vibrant green accent */
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    
+	font-family: "Inter", sans-serif;
 }
 
 /* 🌟 Show the full card when the user hovers over the dot */
