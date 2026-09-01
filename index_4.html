@@ -24,9 +24,9 @@
             src="2snake.glb" 
             alt="Aztec Snake" 
             camera-controls 
-            skybox-image="museum.jpg"
-            disable-pan
+            skybox-image="skybox.jpg"
 			
+            disable-pan
             auto-rotate 
             camera-orbit="90deg 90deg auto"
 			max-camera-orbit="auto 90deg auto"
@@ -34,7 +34,7 @@
             autoplay 
             disable-zoom
             rotation-per-second="3deg"
-            shadow-intensity="1"
+            shadow-intensity="2"
             interaction-prompt="auto"
             environment-image="neutral_HDR.jpg"
             exposure="1"
@@ -44,7 +44,7 @@
     <div class="update-bar"></div>
   </div>   
           
-<button slot="hotspot-1" class="hotspot-card" data-position="-0.2562244535185485m -6.023097880556989m 0.19834495610086167m" data-visibility-attribute="visible" data-normal="-0.9999019462189667m -0.013919839628185963m -0.0015284018608544357m"><div class="annotation-box">The Double-headed serpent is an Aztec sculpture. It is a snake with two heads composed of mostly turquoise pieces applied to a wooden base. It might have been worn or displayed in religious ceremonies. The mosaic is made of pieces of turquoise, spiny oyster shell and conch shell. The sculpture is at the British Museum.</div></button>
+<button slot="hotspot-1" class="hotspot-card" data-position="-0.1192107601664496m 0.22775967948251719m -0.011625256343835488m" data-visibility-attribute="visible" data-normal="-0.9999951360251221m -0.00039108411025774807m 0.003094346347168273m"><div class="annotation-box">The Double-headed serpent is an Aztec sculpture. It is a snake with two heads composed of mostly turquoise pieces applied to a wooden base. It might have been worn or displayed in religious ceremonies. The mosaic is made of pieces of turquoise, spiny oyster shell and conch shell. The sculpture is at the British Museum.</div></button>
 		  
         </model-viewer>
 		
@@ -68,24 +68,24 @@
     const modelData = {
       snake: {
         src: '2snake.glb',
-        
+        skyboxHeight:"0m",
         hotspots: [
-          { slot: 'hotspot-1', pos:'-0.2562244535185485m -6.023097880556989m 0.19834495610086167m', normal:'-0.9999019462189667m -0.013919839628185963m -0.0015284018608544357m', text: 'The Double-headed serpent is an Aztec sculpture. It is a snake with two heads composed of mostly turquoise pieces applied to a wooden base. It might have been worn or displayed in religious ceremonies. The mosaic is made of pieces of turquoise, spiny oyster shell and conch shell. The sculpture is at the British Museum.' }
+          { slot: 'hotspot-1', pos:'-0.1192107601664496m 0.22775967948251719m -0.011625256343835488m', normal:'-0.9999951360251221m -0.00039108411025774807m 0.003094346347168273m', text: 'The Double-headed serpent is an Aztec sculpture. It is a snake with two heads composed of mostly turquoise pieces applied to a wooden base. It might have been worn or displayed in religious ceremonies. The mosaic is made of pieces of turquoise, spiny oyster shell and conch shell. The sculpture is at the British Museum.' }
         ]
       },
       toltec: {
         src: 'atlante.glb',
-        
+        skyboxHeight:"10m",
         hotspots: [
-          { slot: 'hotspot-1', pos: '9.35395615715521m 17.30274669925037m -1.2658335185240217m', normal: '0.9571651115087653m 0.28895694041163034m 0.018407495711331462m', text: 'The Atlantean figures are four anthropomorphic, hand-carved stone statues, belonging to the Toltec culture from the city of Tula in Mexico.  The construction of the Toltec empire has been dated to approximately 750 CE. This date mark the earliest time that the figures could have been carved.' },
+          { slot: 'hotspot-1', pos: '1.0636713907580102m 1.160382502812566m -1.1212049241525084m', normal: '0.9970231797053996m -0.02416632679444018m 0.07321726421684432m', text: 'The Atlantean figures are four anthropomorphic, hand-carved stone statues, belonging to the Toltec culture from the city of Tula in Mexico.  The construction of the Toltec empire has been dated to approximately 750 CE. This date mark the earliest time that the figures could have been carved.' },
           
         ]
       },
       lewis: {
         src: 'lewis.glb',
-        
+        skyboxHeight:"0m",
         hotspots: [
-          { slot: 'hotspot-1', pos: '10.901827649340461m 2.388253869988681m 16.7214724082297m', normal: '0.9957060214119362m 0.055878306193639614m 0.07380470053419948m', text: 'The Lewis Chessmen are a group of distinctive 12th-century chess pieces, along with other game pieces, most of which are carved from walrus ivory. Discovered in 1831 on the Isle of Lewis in the Outer Hebrides of Scotland, they may constitute some of the few surviving medieval chess sets.' },
+          { slot: 'hotspot-1', pos: '1.0479110475484887m 0.2711449079588757m 2.459162529927153m', normal: '0.9873185425131132m 0.13820970046793102m 0.07810361263313415m', text: 'The Lewis Chessmen are a group of distinctive 12th-century chess pieces, along with other game pieces, most of which are carved from walrus ivory. Discovered in 1831 on the Isle of Lewis in the Outer Hebrides of Scotland, they may constitute some of the few surviving medieval chess sets.' },
           
         ]
       },
@@ -103,6 +103,7 @@
 
     // Update model source and reset camera
     viewer.src = data.src;
+    viewer.skyboxHeight = data.skyboxHeight;
     viewer.cameraOrbit = 'auto auto auto';
     viewer.cameraTarget = 'auto auto auto';
 
