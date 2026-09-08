@@ -18,7 +18,6 @@
      3D Museum Gallery | 3D models created by Guillermo R Monroy
     </header>
     
-	
     <div class="model-container">
         <model-viewer 
             src="../2snake.glb" 
@@ -56,6 +55,7 @@
 	<button class="model-btn" onclick="loadModel('lewis')">Lewis Chessmen</button>
         <button class="model-btn" onclick="loadModel('cara')">Caravanserai</button>
         <button class="model-btn" onclick="loadModel('torso2')">Torso Sculpture</button>
+        <button class="model-btn" onclick="loadModel('stauton')">Stauton Chess</button>
   </div>
     
     </footer>
@@ -94,7 +94,7 @@
         src: '../caravanserai3.glb',
         
         hotspots: [
-          { slot: 'hotspot-1', pos: '-0.003710571354713634m 0.08164042277481952m -0.00888818230738242m', normal: '0m -1.1920930742537195e-7m -0.9999999999999929m', text: 'Decorative Caravanserai Relief Artwork.' },
+          { slot: 'hotspot-1', pos: '-0.003710571354713634m 0.08164042277481952m -0.00888818230738242m', normal: '0m -1.1920930742537195e-7m -0.9999999999999929m', text: 'Minimalist Caravanserai Relief Landscape' },
           
         ]
       },
@@ -103,6 +103,14 @@
         
         hotspots: [
           { slot: 'hotspot-1', pos: '0.07191177701767765m 0.0027496259123580055m -0.06452089408057383m', normal: '0.9681245996498783m -0.24893707544388693m -0.027660296856820022m', text: 'Torso Sculpture' },
+          
+        ]
+      },
+        stauton: {
+        src: '../stauton.glb',
+        
+        hotspots: [
+          { slot: 'hotspot-1', pos: '0.07191177701767765m 0.0027496259123580055m -0.06452089408057383m', normal: '0m -1.1920930742537195e-7m -0.9999999999999929m', text: 'Stauton Chess Pieces' },
           
         ]
       },
